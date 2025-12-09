@@ -241,7 +241,9 @@ const WorkWindow = ({ project }: { project: Project }) => {
                 {/* The Screenshot */}
                 <img 
                     src={project.img} 
-                    alt={`Screenshot of ${project.title}`} 
+                    alt={`${project.title} - ${project.category} project screenshot featuring ${project.tags.join(', ')}`} 
+                    loading="lazy"
+                    decoding="async"
                     className={`w-full h-full object-cover transition-all duration-700 ${maximized ? 'opacity-100' : 'opacity-80 group-hover/img:opacity-100 grayscale hover:grayscale-0'}`}
                 />
 

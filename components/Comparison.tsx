@@ -29,9 +29,11 @@ export const Comparison: React.FC = () => {
             </div>
 
             {/* Comparison Table */}
-            <div className="overflow-x-auto pb-8 pt-8"> 
+            <div className="overflow-x-auto pb-8 pt-8" role="region" aria-label="Service comparison table"> 
                 {/* Min width ensures table doesn't break on mobile */}
-                <div className="min-w-[900px] grid grid-cols-[1.2fr_1.8fr_1.5fr_1.5fr]">
+                <table className="min-w-[900px] w-full border-collapse" summary="Comparison of Hoverstate services against freelance designer and agencies">
+                    {/* Table Header */}
+                    <thead>
                     
                     {/* --- Headers --- */}
                     <div className="p-6 border-b border-[#333]"></div> {/* Empty corner */}

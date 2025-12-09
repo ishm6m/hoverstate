@@ -207,7 +207,7 @@ export const Pricing: React.FC = () => {
             <h2 className="font-['VT323'] text-5xl text-[#ffb000] uppercase tracking-wider">
               &lt;RESOURCE_ALLOCATION /&gt;
             </h2>
-            <div className="font-['Space_Mono'] text-[#00ff9d] text-sm tracking-widest bg-[#00ff9d]/5 px-4 py-2 border border-[#00ff9d]/20 rounded">
+            <div className="font-['Space_Mono'] text-[#00ff9d] text-sm tracking-widest bg-[#00ff9d]/5 px-4 py-2 border border-[#00ff9d]/20 rounded" role="status">
                 AVAILABLE_SLOTS: 2
             </div>
         </div>

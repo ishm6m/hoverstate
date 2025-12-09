@@ -100,12 +100,12 @@ export const Hero: React.FC = () => {
             <div className="relative">
             
             {/* System Status Line */}
-            <div className="flex items-center gap-3 mb-6 text-[#00ff9d] font-['Space_Mono'] text-xs tracking-wider">
+            <div className="flex items-center gap-3 mb-6 text-[#00ff9d] font-['Space_Mono'] text-xs tracking-wider" role="status" aria-live="polite">
                 <span className="w-2 h-2 rounded-full bg-[#00ff9d] animate-pulse"></span>
                 SYSTEM STATUS: 2 SPOTS AVAILABLE
             </div>
             
-            {/* Main Headline */}
+            {/* Main Headline - H1 for SEO */}
             <h1 className="font-['VT323'] text-5xl md:text-7xl leading-[0.9] text-[#e0e0e0] mb-8 font-normal">
                 The Web is No <br />
                 Place To Be <br />
