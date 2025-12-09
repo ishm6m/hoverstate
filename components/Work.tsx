@@ -147,7 +147,6 @@ const WorkWindow = ({ project }: { project: Project }) => {
   // Lock scroll when maximized and handle Escape key
   useEffect(() => {
     if (isMaximized) {
-      document.body.style.overflow = 'hidden';
       const handleEsc = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
             setIsMaximized(false);
@@ -155,11 +154,8 @@ const WorkWindow = ({ project }: { project: Project }) => {
       };
       window.addEventListener('keydown', handleEsc);
       return () => { 
-          document.body.style.overflow = ''; 
           window.removeEventListener('keydown', handleEsc);
       };
-    } else {
-      document.body.style.overflow = '';
     }
   }, [isMaximized]);
 

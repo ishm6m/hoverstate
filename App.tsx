@@ -95,7 +95,7 @@ export default function App() {
              {/* Logo Section */}
              <div 
                 className="flex items-center gap-2 group cursor-pointer relative z-10" 
-                onClick={() => window.location.href = window.location.pathname}
+                onClick={() => window.location.hash = '#hero'}
              >
                 {/* Logo Icon */}
                 <div className="w-6 h-6 border border-[#ffb000] flex items-center justify-center bg-[#ffb000]/10 group-hover:bg-[#ffb000] transition-all duration-300">

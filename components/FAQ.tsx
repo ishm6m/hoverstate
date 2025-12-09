@@ -69,17 +69,7 @@ export const FAQ: React.FC = () => {
     }
   }, [history, isTyping, isMaximized, isCollapsed]);
 
-  // Lock body scroll when maximized
-  useEffect(() => {
-    if (isMaximized) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isMaximized]);
+  // Note: No body scroll locking - let page scroll naturally even when maximized
 
   const handleMinimize = () => {
     if (isMaximized) {
