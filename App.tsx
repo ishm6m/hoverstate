@@ -28,26 +28,22 @@ export default function App() {
     // Update on resize
     window.addEventListener('resize', updateNavbarHeight);
     
-    // Force scroll to top immediately on mount
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
+    // Handle hash-based navigation (smooth scroll to section)
+    const handleHashNavigation = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const element = document.querySelector(hash);
+        if (element) {
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }, 0);
+        }
+      }
+    };
     
-    // If there's a hash in the URL and it's not #hero, remove it
-    if (window.location.hash && window.location.hash !== '#hero') {
-      window.history.replaceState(null, '', window.location.pathname);
-    }
-    
-    // Force scroll again after a small delay
-    const timer1 = setTimeout(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-      document.documentElement.scrollTop = 0;
-      updateNavbarHeight();
-    }, 0);
-    
-    const timer2 = setTimeout(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-    }, 50);
+    // Handle hash on mount and when hash changes
+    handleHashNavigation();
+    window.addEventListener('hashchange', handleHashNavigation);
     
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -57,9 +53,8 @@ export default function App() {
     const timer3 = setInterval(() => setTime(new Date()), 1000);
     
     return () => {
-        clearTimeout(timer1);
-        clearTimeout(timer2);
         window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener('hashchange', handleHashNavigation);
         window.removeEventListener('resize', updateNavbarHeight);
         clearInterval(timer3);
     };
