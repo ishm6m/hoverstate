@@ -168,9 +168,9 @@ const PricingCard: React.FC<PricingCardProps> = ({
             </button>
             
             <div className="text-center mb-10">
-                <a href="#" className="font-['Space_Mono'] text-[10px] text-[#555] hover:text-[#e0e0e0] uppercase tracking-wider transition-colors">
-                    Better email? Let's chat &rarr;
-                </a>
+                    <a href="#" onClick={(e) => e.preventDefault()} className="font-['Space_Mono'] text-[10px] text-[#555] hover:text-[#e0e0e0] uppercase tracking-wider transition-colors" aria-label="Better email link">
+                        Better email? Let's chat &rarr;
+                    </a>
             </div>
 
             <div className={`grid gap-4 ${isFeatured ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>

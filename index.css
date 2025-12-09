@@ -1,0 +1,3 @@
+/* Minimal stylesheet placeholder — keep project visuals unchanged. */
+:root { --safe-bg: #0d0d0f; }
+html, body { background: var(--safe-bg); }

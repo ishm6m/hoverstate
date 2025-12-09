@@ -11,10 +11,10 @@ export const Footer: React.FC = () => {
         
         <div className="flex gap-8">
             {['TWITTER', 'GITHUB', 'LINKEDIN'].map((link) => (
-                <a key={link} href="#" className="font-['Space_Mono'] text-xs text-[#888] hover:text-[#ffb000] transition-colors relative group">
-                    {link}
-                    <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#ffb000] group-hover:w-full transition-all duration-300"></span>
-                </a>
+              <a key={link} href="#" onClick={(e) => e.preventDefault()} className="font-['Space_Mono'] text-xs text-[#888] hover:text-[#ffb000] transition-colors relative group" aria-label={`${link} link`}>
+                {link}
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#ffb000] group-hover:w-full transition-all duration-300"></span>
+              </a>
             ))}
         </div>
 
