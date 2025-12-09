@@ -10,5 +10,25 @@
   "routes": [
     { "handle": "filesystem" },
     { "src": "/.*", "dest": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "(.*)\\.(png|jpg|jpeg|webp|gif|ico)$",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "(.*)\\.(css|js)$",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "(.*)\\.(woff2|woff|ttf|eot)$",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
   ]
 }
