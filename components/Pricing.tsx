@@ -397,23 +397,10 @@ export const Pricing: React.FC = () => {
                     {/* 6. Pricing Slider - Below Features */}
                     <PricingSlider />
                     
-                    <div className="text-center mb-10">
+                    <div className="text-center">
                             <a href="#" onClick={(e) => e.preventDefault()} className="font-['Space_Mono'] text-[10px] text-[#555] hover:text-[#e0e0e0] uppercase tracking-wider transition-colors" aria-label="Better email link">
                                 Better email? Let's chat &rarr;
                             </a>
-                    </div>
-
-                    <div className="mt-auto">
-                        <div className={`mt-8 p-4 rounded-lg border flex items-center justify-between cursor-pointer transition-all duration-300 select-none group bg-transparent border-[#333] hover:border-[#555]`}>
-                            <div className="flex items-center gap-4">
-                                <div className={`w-10 h-6 rounded-full relative transition-colors duration-300 border border-transparent bg-[#333] group-hover:bg-[#444]`}>
-                                    <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-black transition-transform duration-300 ease-out translate-x-0`}></div>
-                                </div>
-                                <span className={`font-['Space_Mono'] text-sm transition-colors duration-300 text-[#888]`}>
-                                    + Rush Delivery: <span className={`font-bold transition-colors duration-300 text-[#e0e0e0]`}>$3,000</span>
-                                </span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </MVPPriceContext.Provider>
