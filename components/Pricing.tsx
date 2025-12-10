@@ -219,24 +219,24 @@ export const Pricing: React.FC = () => {
             <div className="w-full">
                 <PricingCard 
                     title="Landing Page+"
-                    description="Ideal for designing or redesigning website to double your conversion rates."
-                    price="6,990"
-                    priceSuffix="[fixed]"
+                    description="Your landing page isn't just a page — it's the first proof your product is real. We design to create belief — in users, investors, and the idea itself."
+                    price="1,200"
+                    priceSuffix="[starting]"
                     icon={<FolderIcon />}
                     isFullWidth={false}
                     isFeatured={true}
                     features={[
-                        "Animations",
-                        "10-14 Days turnaround time",
-                        "Custom 3D models or 2D illustrations",
-                        "High-converting sales funnel",
-                        "1 Month of FREE Support",
-                        "2 Design Concepts",
-                        "Professional Copywriting",
-                        "Framer development"
+                        "Conversion-focused landing page grounded in strategy",
+                        "Responsive design across desktop, tablet & mobile",
+                        "Clear messaging architecture that drives user action",
+                        "Refined copy for positioning, headlines & value props",
+                        "Full delivery within 10–14 days",
+                        "Fast-track option: Initial landing page in 1–2 days",
+                        "30-day post-launch support",
+                        "Figma design + Framer development (or custom coded build)"
                     ]}
-                    addonLabel="+ No-code Development:"
-                    addonPrice="$2,000"
+                    addonLabel="Brand Identity"
+                    addonPrice="+ $800"
                 />
             </div>
 
