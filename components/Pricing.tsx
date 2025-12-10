@@ -1,4 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, createContext, useContext } from 'react';
+
+// --- MVP Price Context ---
+const MVPPriceContext = createContext<{ screenCount: number; setScreenCount: (count: number) => void }>({
+  screenCount: 20,
+  setScreenCount: () => {},
+});
+
+const useMVPPrice = () => useContext(MVPPriceContext);
 
 // --- Icons ---
 const FolderIcon = () => (
@@ -41,20 +49,7 @@ const CheckIconBlue = () => (
 
 // --- Pricing Slider Component ---
 const PricingSlider: React.FC = () => {
-  const [screenCount, setScreenCount] = useState(20);
-
-  // Calculate price based on screen count
-  // Base: 10 screens = $2,000
-  // Rate: $150 per additional screen
-  const calculatePrice = (screens: number): string => {
-    if (screens >= 60) return "quote";
-    const basePrice = 2000;
-    const additionalScreens = Math.max(0, screens - 10);
-    const total = basePrice + (additionalScreens * 150);
-    return total.toLocaleString();
-  };
-
-  const price = calculatePrice(screenCount);
+  const { screenCount, setScreenCount } = useMVPPrice();
 
   return (
     <div className="mt-6 p-4 bg-[#111] border border-[#333] rounded-lg">
@@ -84,29 +79,40 @@ const PricingSlider: React.FC = () => {
         <span>70</span>
         <span>100+</span>
       </div>
+    </div>
+  );
+};
 
-      {/* Price Display */}
-      <div className="mt-4 p-3 bg-[#050505] border border-[#333] rounded">
-        {price === "quote" ? (
-          <div className="text-center">
-            <div className="font-['Space_Mono'] text-[#888] text-[10px] uppercase tracking-widest mb-2">
-              60+ screens → Custom Quote
-            </div>
-            <button className="w-full py-2 bg-[#ffb000] text-black font-['Space_Mono'] font-bold text-xs tracking-widest hover:bg-[#ffca43] transition-colors uppercase">
-              Get a Quote
-            </button>
-          </div>
-        ) : (
-          <div className="text-center">
-            <div className="font-['VT323'] text-3xl text-[#e0e0e0]">
-              ${price}
-            </div>
-            <div className="font-['Space_Mono'] text-[#555] text-[9px] mt-1">
-              Design + Dev
-            </div>
-          </div>
-        )}
-      </div>
+// --- MVP Price Display Component ---
+const MVPPriceDisplay: React.FC = () => {
+  const { screenCount } = useMVPPrice();
+
+  // Calculate price based on screen count
+  const calculatePrice = (screens: number): string => {
+    if (screens >= 60) return "quote";
+    const basePrice = 2000;
+    const additionalScreens = Math.max(0, screens - 10);
+    const total = basePrice + (additionalScreens * 150);
+    return total.toLocaleString();
+  };
+
+  const price = calculatePrice(screenCount);
+
+  return (
+    <div className="flex items-baseline gap-2 mb-8 h-16">
+      {price === "quote" ? (
+        <button className="w-full py-4 bg-[#ffb000] text-black font-['Space_Mono'] font-bold text-sm tracking-widest hover:bg-[#ffca43] transition-colors uppercase border-2 border-[#ffb000] shadow-[4px_4px_0px_0px_rgba(255,176,0,0.3)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]">
+          Get a Quote
+        </button>
+      ) : (
+        <>
+          <span className="text-[#ffb000] text-lg font-bold">$</span>
+          <span className="font-['VT323'] text-6xl text-[#e0e0e0]">
+            <MatrixPrice value={price} />
+          </span>
+          <span className="font-['Space_Mono'] text-sm text-[#555]">[design+dev]</span>
+        </>
+      )}
     </div>
   );
 };
@@ -267,6 +273,8 @@ const PricingCard: React.FC<PricingCardProps> = ({
 };
 
 export const Pricing: React.FC = () => {
+  const [mvpScreenCount, setMVPScreenCount] = useState(20);
+
   return (
     <section id="pricing" className="w-full py-24 border-t border-[#333] relative overflow-hidden bg-gradient-to-b from-[#0d0d0f] via-[#08080a] to-[#0a0a0c]">
       {/* Background Grid */}
@@ -345,58 +353,68 @@ export const Pricing: React.FC = () => {
             />
 
             {/* Card 4: MVP Launch - Mobile/Web App */}
-            <div className="relative bg-[#050505] border border-[#333] p-8 md:p-10 flex flex-col hover:border-[#ffb000]/50 transition-colors duration-300 group h-full">
-                <div className="mb-6"><FolderIcon /></div>
+            <MVPPriceContext.Provider value={{ screenCount: mvpScreenCount, setScreenCount: setMVPScreenCount }}>
+                <div className="relative bg-[#050505] border border-[#333] p-8 md:p-10 flex flex-col hover:border-[#ffb000]/50 transition-colors duration-300 group h-full">
+                    <div className="mb-6"><FolderIcon /></div>
 
-                <h3 className="font-['VT323'] text-4xl text-[#e0e0e0] mb-4 tracking-wide">MVP Launch - Mobile/Web App</h3>
-                <p className="font-['Space_Mono'] text-[#888] text-sm leading-relaxed mb-8 max-w-lg">
-                    Custom MVP or full website build from 0 → launch.
-                </p>
+                    <h3 className="font-['VT323'] text-4xl text-[#e0e0e0] mb-4 tracking-wide">MVP Launch - Mobile/Web App</h3>
+                    <p className="font-['Space_Mono'] text-[#888] text-sm leading-relaxed mb-8 max-w-lg">
+                        Custom MVP or full website build from 0 → launch.
+                    </p>
 
-                <div className="grid gap-4 grid-cols-1 mb-6">
-                    {[
-                        "Dedicated Design Lead + senior dev team",
-                        "Go-to-market strategy plan + predefined SOW",
-                        "5/7 async communication via Slack + Loom",
-                        "Milestone-based 50/25/25 secure payment structure",
-                        "User testing support + iteration cycles",
-                    ].map((feature, i) => (
-                        <div key={i} className="flex items-start gap-3">
-                             <CheckIcon />
-                             <span className="font-['Space_Mono'] text-sm text-[#ccc] leading-tight">{feature}</span>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Pricing Slider - Compact */}
-                <PricingSlider />
-
-                <button className="w-full py-4 border border-[#ffb000] text-[#ffb000] font-['Space_Mono'] font-bold text-sm tracking-widest hover:bg-[#ffb000] hover:text-black transition-all mb-4 uppercase shadow-[4px_4px_0px_0px_rgba(255,176,0,0.3)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] mt-6">
-                    Book a 15-min call
-                </button>
-                
-                <div className="text-center">
-                        <a href="#" onClick={(e) => e.preventDefault()} className="font-['Space_Mono'] text-[10px] text-[#555] hover:text-[#e0e0e0] uppercase tracking-wider transition-colors" aria-label="Better email link">
-                            Better email? Let's chat &rarr;
-                        </a>
-                </div>
-
-                <div className="mt-8">
-                    <div 
-                        className={`p-4 rounded-lg border flex items-center justify-between cursor-pointer transition-all duration-300 select-none group 
-                        bg-transparent border-[#333] hover:border-[#555]`}
-                    >
-                        <div className="flex items-center gap-4">
-                            <div className={`w-10 h-6 rounded-full relative transition-colors duration-300 border border-transparent bg-[#333] group-hover:bg-[#444]`}>
-                                <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-black transition-transform duration-300 ease-out translate-x-0`}></div>
+                    {/* Features List */}
+                    <div className="grid gap-4 grid-cols-1 mb-8">
+                        {[
+                            "Dedicated Design Lead + senior dev team",
+                            "Go-to-market strategy plan + predefined SOW",
+                            "5/7 async communication via Slack + Loom",
+                            "Milestone-based 50/25/25 secure payment structure",
+                            "User testing support + iteration cycles",
+                        ].map((feature, i) => (
+                            <div key={i} className="flex items-start gap-3">
+                                 <CheckIcon />
+                                 <span className="font-['Space_Mono'] text-sm text-[#ccc] leading-tight">{feature}</span>
                             </div>
-                            <span className={`font-['Space_Mono'] text-sm transition-colors duration-300 text-[#888]`}>
-                                + Rush Delivery: <span className={`font-bold transition-colors duration-300 text-[#e0e0e0]`}>$3,000</span>
-                            </span>
+                        ))}
+                    </div>
+
+                    {/* Pricing Slider - Below Features */}
+                    <PricingSlider />
+
+                    {/* Dynamic Price Display */}
+                    <MVPPriceDisplay />
+
+                    {/* CTA Button - Changes at 60+ screens */}
+                    {mvpScreenCount >= 60 ? (
+                        <button className="w-full py-4 border border-[#ffb000] text-[#ffb000] font-['Space_Mono'] font-bold text-sm tracking-widest hover:bg-[#ffb000] hover:text-black transition-all mb-4 uppercase shadow-[4px_4px_0px_0px_rgba(255,176,0,0.3)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]">
+                            Get a Quote
+                        </button>
+                    ) : (
+                        <button className="w-full py-4 border border-[#ffb000] text-[#ffb000] font-['Space_Mono'] font-bold text-sm tracking-widest hover:bg-[#ffb000] hover:text-black transition-all mb-4 uppercase shadow-[4px_4px_0px_0px_rgba(255,176,0,0.3)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]">
+                            Book a 15-min call
+                        </button>
+                    )}
+                    
+                    <div className="text-center mb-10">
+                            <a href="#" onClick={(e) => e.preventDefault()} className="font-['Space_Mono'] text-[10px] text-[#555] hover:text-[#e0e0e0] uppercase tracking-wider transition-colors" aria-label="Better email link">
+                                Better email? Let's chat &rarr;
+                            </a>
+                    </div>
+
+                    <div className="mt-auto">
+                        <div className={`mt-8 p-4 rounded-lg border flex items-center justify-between cursor-pointer transition-all duration-300 select-none group bg-transparent border-[#333] hover:border-[#555]`}>
+                            <div className="flex items-center gap-4">
+                                <div className={`w-10 h-6 rounded-full relative transition-colors duration-300 border border-transparent bg-[#333] group-hover:bg-[#444]`}>
+                                    <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-black transition-transform duration-300 ease-out translate-x-0`}></div>
+                                </div>
+                                <span className={`font-['Space_Mono'] text-sm transition-colors duration-300 text-[#888]`}>
+                                    + Rush Delivery: <span className={`font-bold transition-colors duration-300 text-[#e0e0e0]`}>$3,000</span>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </MVPPriceContext.Provider>
 
         </div>
       </div>
