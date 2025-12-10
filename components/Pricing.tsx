@@ -212,77 +212,93 @@ export const Pricing: React.FC = () => {
             </div>
         </div>
 
-        {/* Bento Grid */}
-        <div className="flex flex-col gap-4 max-w-3xl mx-auto">
+        {/* Bento Grid - 2x2 Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl mx-auto">
             
-            {/* Card 1: Landing Page+ (Featured - Full Width) */}
-            <div className="w-full">
-                <PricingCard 
-                    title="Landing Page+"
-                    description="Your landing page isn't just a page — it's the first proof your product is real. We design to create belief — in users, investors, and the idea itself."
-                    price="1,200"
-                    priceSuffix="[starting]"
-                    icon={<FolderIcon />}
-                    isFullWidth={false}
-                    isFeatured={true}
-                    features={[
-                        "Conversion-focused landing page grounded in strategy",
-                        "Responsive design across desktop, tablet & mobile",
-                        "Clear messaging architecture that drives user action",
-                        "Refined copy for positioning, headlines & value props",
-                        "Full delivery within 10–14 days",
-                        "Fast-track option: Initial landing page in 1–2 days",
-                        "30-day post-launch support",
-                        "Figma design + Framer development (or custom coded build)"
-                    ]}
-                    addonLabel="Brand Identity"
-                    addonPrice="+ $800"
-                />
-            </div>
+            {/* Card 1: Landing Page+ */}
+            <PricingCard 
+                title="Landing Page+"
+                description="Your landing page isn't just a page, it's the first proof your product is real. We design to create belief — in users, investors, and the idea itself."
+                price="1,200"
+                priceSuffix="[starting]"
+                icon={<FolderIcon />}
+                isFeatured={false}
+                features={[
+                    "Conversion-focused landing page grounded in strategy",
+                    "Responsive design across desktop, tablet & mobile",
+                    "Clear messaging architecture that drives user action",
+                    "Refined copy for positioning, headlines & value props",
+                    "Full delivery within 10–14 days",
+                    "Fast-track option: Initial landing page in 1–2 days",
+                    "30-day post-launch support",
+                    "Figma design + Framer development"
+                ]}
+                addonLabel="Brand Identity"
+                addonPrice="+ $800"
+            />
 
-            {/* Cards 2 & 3: 2-Column Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Card 2: Partnership */}
-                <PricingCard 
-                    title="Partnership"
-                    description="Great if you need ongoing help, have many projects or have undefined scope of work."
-                    price="5,990"
-                    priceSuffix="+/month"
-                    icon={<GearIcon />}
-                    tag="LIMITED AVAILABILITY"
-                    features={[
-                        "Dedicated Design Lead",
-                        "Team of senior creatives",
-                        "End-to-end project management",
-                        "Unlimited Design requests",
-                        "5/7 Communication (Slack/Loom)",
-                        "1 workstream at a time",
-                        "Monthly sync calls"
-                    ]}
-                    addonLabel="Accelerator: x2 velocity:"
-                    addonPrice="$5,000"
-                />
+            {/* Card 2: Brand Identity */}
+            <PricingCard 
+                title="Brand Identity"
+                description="Build a memorable brand that stands out in a crowded market. Visual identity + brand strategy that communicates who you are."
+                price="2,500"
+                priceSuffix="[starting]"
+                icon={<CompassIcon />}
+                isFeatured={false}
+                features={[
+                    "Brand strategy + positioning workshop",
+                    "Logo design (3 concepts, unlimited revisions)",
+                    "Color palette & typography system",
+                    "Brand guidelines document (Figma)",
+                    "Social media kit (templates & assets)",
+                    "Email signature templates",
+                    "Favicon & brand assets",
+                    "10-day turnaround time"
+                ]}
+                addonLabel="Website Design"
+                addonPrice="+ $1,500"
+            />
 
-                {/* Card 3: MVP Launch Kit */}
-                <PricingCard 
-                    title="MVP Launch Kit"
-                    description="Full App MVP (40-60 screens) or Website (design+dev) with 10+ unique pages."
-                    price="9,990"
-                    priceSuffix="+ [fixed]"
-                    icon={<CompassIcon />}
-                    features={[
-                        "Dedicated Design Lead",
-                        "Team of senior creatives",
-                        "Go-to-market strategy plan",
-                        "Predefined scope of work (SOW)",
-                        "5/7 Communication (Slack/Loom)",
-                        "Framer or Webflow development",
-                        "50/25/25 secure payment"
-                    ]}
-                    addonLabel="+ Rush Delivery:"
-                    addonPrice="$3,000"
-                />
-            </div>
+            {/* Card 3: Partnership */}
+            <PricingCard 
+                title="Partnership"
+                description="Continuous design without hiring in-house. We step in as your external design arm, moving the product forward every week."
+                price="3,000"
+                priceSuffix="/month (26 hours/week)"
+                icon={<GearIcon />}
+                tag="LIMITED AVAILABILITY"
+                features={[
+                    "Continuous product + brand design support",
+                    "Team of senior creatives",
+                    "End-to-end project management",
+                    "Unlimited Design requests",
+                    "5/7 Communication (Slack/Loom)",
+                    "1 workstream at a time",
+                    "Monthly sync calls"
+                ]}
+                addonLabel="Accelerator: x2 velocity:"
+                addonPrice="$5,000"
+            />
+
+            {/* Card 4: MVP Launch Kit */}
+            <PricingCard 
+                title="MVP Launch Kit"
+                description="Full App MVP (40-60 screens) or Website (design+dev) with 10+ unique pages."
+                price="9,990"
+                priceSuffix="[fixed]"
+                icon={<FolderIcon />}
+                features={[
+                    "Dedicated Design Lead",
+                    "Team of senior creatives",
+                    "Go-to-market strategy plan",
+                    "Predefined scope of work (SOW)",
+                    "5/7 Communication (Slack/Loom)",
+                    "Framer or Webflow development",
+                    "50/25/25 secure payment"
+                ]}
+                addonLabel="+ Rush Delivery:"
+                addonPrice="$3,000"
+            />
 
         </div>
       </div>
