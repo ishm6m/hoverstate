@@ -30,42 +30,39 @@ export const Comparison: React.FC = () => {
 
             {/* Comparison Table */}
             <div className="overflow-x-auto pb-8 pt-8" role="region" aria-label="Service comparison table"> 
-                {/* Min width ensures table doesn't break on mobile */}
-                <table className="min-w-[900px] w-full border-collapse" summary="Comparison of Hoverstate services against freelance designer and agencies">
-                    {/* Table Header */}
-                    <thead>
-                    
-                    {/* --- Headers --- */}
-                    <div className="p-6 border-b border-[#333]"></div> {/* Empty corner */}
-                    
-                    {/* Hoverstate Header */}
-                    <div className="relative p-8 border border-[#ffb000] border-b-0 bg-[#ffb000]/10 rounded-t-xl text-center flex flex-col items-center justify-center z-10">
-                        <div className="absolute -top-4 bg-[#0a0a0c] px-3 text-[#ffb000] z-20">
-                             {/* Star Icon */}
-                             <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <div className="min-w-[900px] w-full">
+                    {/* Table Header Row */}
+                    <div className="flex">
+                        <div className="flex-1 p-6 border-b border-[#333]"></div>
+                        
+                        {/* Hoverstate Header */}
+                        <div className="flex-1 relative p-8 border border-[#ffb000] border-b-0 bg-[#ffb000]/10 rounded-t-xl text-center flex flex-col items-center justify-center z-10">
+                            <div className="absolute -top-4 bg-[#0a0a0c] px-3 text-[#ffb000] z-20">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            </div>
+                            <h3 className="font-['VT323'] text-4xl text-[#ffb000] tracking-widest uppercase mt-2">HOVERSTATE</h3>
                         </div>
-                        <h3 className="font-['VT323'] text-4xl text-[#ffb000] tracking-widest uppercase mt-2">HOVERSTATE</h3>
+
+                        <div className="flex-1 p-6 border-b border-[#333] text-center flex items-end justify-center pb-6">
+                            <h3 className="font-['Space_Mono'] text-lg text-[#666] font-bold uppercase tracking-wide">Full-time<br/>Designer</h3>
+                        </div>
+
+                        <div className="flex-1 p-6 border-b border-[#333] text-center flex items-end justify-center pb-6">
+                            <h3 className="font-['Space_Mono'] text-lg text-[#666] font-bold uppercase tracking-wide">Other<br/>Agencies</h3>
+                        </div>
                     </div>
 
-                    <div className="p-6 border-b border-[#333] text-center flex items-end justify-center pb-6">
-                        <h3 className="font-['Space_Mono'] text-lg text-[#666] font-bold uppercase tracking-wide">Full-time<br/>Designer</h3>
-                    </div>
-
-                    <div className="p-6 border-b border-[#333] text-center flex items-end justify-center pb-6">
-                        <h3 className="font-['Space_Mono'] text-lg text-[#666] font-bold uppercase tracking-wide">Other<br/>Agencies</h3>
-                    </div>
-
-                    {/* --- Rows --- */}
+                    {/* Table Rows */}
                     {rows.map((row, index) => (
-                        <React.Fragment key={index}>
+                        <div key={index} className="flex">
                             {/* Label */}
-                            <div className="p-6 border-b border-[#333] flex items-center text-[#888] font-['Space_Mono'] text-xs md:text-sm uppercase tracking-wider">
+                            <div className="flex-1 p-6 border-b border-[#333] flex items-center text-[#888] font-['Space_Mono'] text-xs md:text-sm uppercase tracking-wider">
                                 {row.label}
                             </div>
 
                             {/* Hoverstate Data Cell */}
                             <div className={`
-                                p-6 border-x border-[#ffb000] flex items-center justify-center text-center font-['Space_Mono'] text-[#ffb000] font-bold text-sm md:text-base bg-[#ffb000]/5 backdrop-blur-sm
+                                flex-1 p-6 border-x border-[#ffb000] flex items-center justify-center text-center font-['Space_Mono'] text-[#ffb000] font-bold text-sm md:text-base bg-[#ffb000]/5 backdrop-blur-sm
                                 ${index === rows.length - 1 ? 'border-b rounded-b-xl' : 'border-b border-[#ffb000]/20'}
                                 hover:bg-[#ffb000]/10 transition-colors duration-300
                             `}>
@@ -73,15 +70,15 @@ export const Comparison: React.FC = () => {
                             </div>
 
                             {/* FT Data Cell */}
-                            <div className="p-6 border-b border-[#333] flex items-center justify-center text-center font-['Space_Mono'] text-[#555] text-sm">
+                            <div className="flex-1 p-6 border-b border-[#333] flex items-center justify-center text-center font-['Space_Mono'] text-[#555] text-sm">
                                 {row.ft}
                             </div>
 
                             {/* Agency Data Cell */}
-                            <div className="p-6 border-b border-[#333] flex items-center justify-center text-center font-['Space_Mono'] text-[#555] text-sm">
+                            <div className="flex-1 p-6 border-b border-[#333] flex items-center justify-center text-center font-['Space_Mono'] text-[#555] text-sm">
                                 {row.agency}
                             </div>
-                        </React.Fragment>
+                        </div>
                     ))}
                 </div>
             </div>
