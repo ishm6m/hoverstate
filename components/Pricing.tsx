@@ -39,6 +39,78 @@ const CheckIconBlue = () => (
     </svg>
 );
 
+// --- Pricing Slider Component ---
+const PricingSlider: React.FC = () => {
+  const [screenCount, setScreenCount] = useState(20);
+
+  // Calculate price based on screen count
+  // Base: 10 screens = $2,000
+  // Rate: $150 per additional screen
+  const calculatePrice = (screens: number): string => {
+    if (screens >= 60) return "quote";
+    const basePrice = 2000;
+    const additionalScreens = Math.max(0, screens - 10);
+    const total = basePrice + (additionalScreens * 150);
+    return total.toLocaleString();
+  };
+
+  const price = calculatePrice(screenCount);
+
+  return (
+    <div className="mt-6 p-4 bg-[#111] border border-[#333] rounded-lg">
+      <div className="flex items-center justify-between mb-3">
+        <span className="font-['Space_Mono'] text-[#888] text-xs uppercase tracking-wider">
+          Screens: <span className="text-[#ffb000] font-bold">{screenCount}</span>
+        </span>
+      </div>
+
+      {/* Slider */}
+      <input
+        type="range"
+        min="10"
+        max="100"
+        step="5"
+        value={screenCount}
+        onChange={(e) => setScreenCount(parseInt(e.target.value))}
+        className="w-full h-1.5 bg-[#222] rounded-full appearance-none cursor-pointer accent-[#ffb000]"
+        style={{
+          background: `linear-gradient(to right, #ffb000 0%, #ffb000 ${((screenCount - 10) / 90) * 100}%, #222 ${((screenCount - 10) / 90) * 100}%, #222 100%)`
+        }}
+      />
+
+      <div className="flex items-center justify-between mt-2 text-[9px] font-['Space_Mono'] text-[#555]">
+        <span>10</span>
+        <span>40</span>
+        <span>70</span>
+        <span>100+</span>
+      </div>
+
+      {/* Price Display */}
+      <div className="mt-4 p-3 bg-[#050505] border border-[#333] rounded">
+        {price === "quote" ? (
+          <div className="text-center">
+            <div className="font-['Space_Mono'] text-[#888] text-[10px] uppercase tracking-widest mb-2">
+              60+ screens → Custom Quote
+            </div>
+            <button className="w-full py-2 bg-[#ffb000] text-black font-['Space_Mono'] font-bold text-xs tracking-widest hover:bg-[#ffca43] transition-colors uppercase">
+              Get a Quote
+            </button>
+          </div>
+        ) : (
+          <div className="text-center">
+            <div className="font-['VT323'] text-3xl text-[#e0e0e0]">
+              ${price}
+            </div>
+            <div className="font-['Space_Mono'] text-[#555] text-[9px] mt-1">
+              Design + Dev
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 // --- Animation Components ---
 
 const MatrixPrice = ({ value }: { value: string }) => {
@@ -224,14 +296,11 @@ export const Pricing: React.FC = () => {
                 icon={<FolderIcon />}
                 isFeatured={false}
                 features={[
-                    "Conversion-focused landing page grounded in strategy",
-                    "Responsive design across desktop, tablet & mobile",
-                    "Clear messaging architecture that drives user action",
-                    "Refined copy for positioning, headlines & value props",
-                    "Full delivery within 10–14 days",
-                    "Fast-track option: Initial landing page in 1–2 days",
-                    "30-day post-launch support",
-                    "Figma design + Framer development"
+                    "Conversion-focused landing page (strategy + UX)",
+                    "Clear messaging + refined copywriting",
+                    "Fully responsive for all breakpoints",
+                    "Delivered in 7–14 days, 30 Days post-launch support",
+                    "Figma file + Framer-ready handoff / build",
                 ]}
                 addonLabel="Brand Identity"
                 addonPrice="+ $800"
@@ -240,65 +309,94 @@ export const Pricing: React.FC = () => {
             {/* Card 2: Brand Identity */}
             <PricingCard 
                 title="Brand Identity"
-                description="Build a memorable brand that stands out in a crowded market. Visual identity + brand strategy that communicates who you are."
-                price="2,500"
+                description="We design a memorable brand that stands out in a crowded market."
+                price="800"
                 priceSuffix="[starting]"
                 icon={<CompassIcon />}
                 isFeatured={false}
                 features={[
-                    "Brand strategy + positioning workshop",
-                    "Logo design (3 concepts, unlimited revisions)",
-                    "Color palette & typography system",
-                    "Brand guidelines document (Figma)",
-                    "Social media kit (templates & assets)",
-                    "Email signature templates",
-                    "Favicon & brand assets",
+                    "Logo, color, type & visual direction",
+                    "Brand identity system + guidelines document (Figma)",
+                    "Asset pack for marketing + socials",
+                    "Scales easily into website or product",
                     "10-day turnaround time"
                 ]}
-                addonLabel="Website Design"
-                addonPrice="+ $1,500"
+                addonLabel="Pitch Deck"
+                addonPrice="+ $500"
             />
 
-            {/* Card 3: Partnership */}
+            {/* Card 3: Partnership Retainer*/}
             <PricingCard 
-                title="Partnership"
+                title="Partnership Retainer"
                 description="Continuous design without hiring in-house. We step in as your external design arm, moving the product forward every week."
-                price="3,000"
+                price="3,500"
                 priceSuffix="/month (26 hours/week)"
                 icon={<GearIcon />}
                 tag="LIMITED AVAILABILITY"
                 features={[
-                    "Continuous product + brand design support",
-                    "Team of senior creatives",
+                    "Team of senior creatives with continuous product + brand design support",
+                    "Unlimited design requests (1 active at a time)",
                     "End-to-end project management",
-                    "Unlimited Design requests",
-                    "5/7 Communication (Slack/Loom)",
-                    "1 workstream at a time",
-                    "Monthly sync calls"
+                    "5/7 async communication via Slack + Loom",
+                    "Weekly sprints & iteration reviews",
                 ]}
                 addonLabel="Accelerator: x2 velocity:"
                 addonPrice="$5,000"
             />
 
-            {/* Card 4: MVP Launch Kit */}
-            <PricingCard 
-                title="MVP Launch Kit"
-                description="Full App MVP (40-60 screens) or Website (design+dev) with 10+ unique pages."
-                price="9,990"
-                priceSuffix="[fixed]"
-                icon={<FolderIcon />}
-                features={[
-                    "Dedicated Design Lead",
-                    "Team of senior creatives",
-                    "Go-to-market strategy plan",
-                    "Predefined scope of work (SOW)",
-                    "5/7 Communication (Slack/Loom)",
-                    "Framer or Webflow development",
-                    "50/25/25 secure payment"
-                ]}
-                addonLabel="+ Rush Delivery:"
-                addonPrice="$3,000"
-            />
+            {/* Card 4: MVP Launch - Mobile/Web App */}
+            <div className="relative bg-[#050505] border border-[#333] p-8 md:p-10 flex flex-col hover:border-[#ffb000]/50 transition-colors duration-300 group h-full">
+                <div className="mb-6"><FolderIcon /></div>
+
+                <h3 className="font-['VT323'] text-4xl text-[#e0e0e0] mb-4 tracking-wide">MVP Launch - Mobile/Web App</h3>
+                <p className="font-['Space_Mono'] text-[#888] text-sm leading-relaxed mb-8 max-w-lg">
+                    Custom MVP or full website build from 0 → launch.
+                </p>
+
+                <div className="grid gap-4 grid-cols-1 mb-6">
+                    {[
+                        "Dedicated Design Lead + senior dev team",
+                        "Go-to-market strategy plan + predefined SOW",
+                        "5/7 async communication via Slack + Loom",
+                        "Milestone-based 50/25/25 secure payment structure",
+                        "User testing support + iteration cycles",
+                    ].map((feature, i) => (
+                        <div key={i} className="flex items-start gap-3">
+                             <CheckIcon />
+                             <span className="font-['Space_Mono'] text-sm text-[#ccc] leading-tight">{feature}</span>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Pricing Slider - Compact */}
+                <PricingSlider />
+
+                <button className="w-full py-4 border border-[#ffb000] text-[#ffb000] font-['Space_Mono'] font-bold text-sm tracking-widest hover:bg-[#ffb000] hover:text-black transition-all mb-4 uppercase shadow-[4px_4px_0px_0px_rgba(255,176,0,0.3)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] mt-6">
+                    Book a 15-min call
+                </button>
+                
+                <div className="text-center">
+                        <a href="#" onClick={(e) => e.preventDefault()} className="font-['Space_Mono'] text-[10px] text-[#555] hover:text-[#e0e0e0] uppercase tracking-wider transition-colors" aria-label="Better email link">
+                            Better email? Let's chat &rarr;
+                        </a>
+                </div>
+
+                <div className="mt-8">
+                    <div 
+                        className={`p-4 rounded-lg border flex items-center justify-between cursor-pointer transition-all duration-300 select-none group 
+                        bg-transparent border-[#333] hover:border-[#555]`}
+                    >
+                        <div className="flex items-center gap-4">
+                            <div className={`w-10 h-6 rounded-full relative transition-colors duration-300 border border-transparent bg-[#333] group-hover:bg-[#444]`}>
+                                <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-black transition-transform duration-300 ease-out translate-x-0`}></div>
+                            </div>
+                            <span className={`font-['Space_Mono'] text-sm transition-colors duration-300 text-[#888]`}>
+                                + Rush Delivery: <span className={`font-bold transition-colors duration-300 text-[#e0e0e0]`}>$3,000</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
       </div>
