@@ -355,14 +355,30 @@ export const Pricing: React.FC = () => {
             {/* Card 4: MVP Launch - Mobile/Web App */}
             <MVPPriceContext.Provider value={{ screenCount: mvpScreenCount, setScreenCount: setMVPScreenCount }}>
                 <div className="relative bg-[#050505] border border-[#333] p-8 md:p-10 flex flex-col hover:border-[#ffb000]/50 transition-colors duration-300 group h-full">
+                    {/* 1. Icon + Title */}
                     <div className="mb-6"><FolderIcon /></div>
-
                     <h3 className="font-['VT323'] text-4xl text-[#e0e0e0] mb-4 tracking-wide">MVP Launch - Mobile/Web App</h3>
+                    
+                    {/* 2. Description */}
                     <p className="font-['Space_Mono'] text-[#888] text-sm leading-relaxed mb-8 max-w-lg">
                         Custom MVP or full website build from 0 → launch.
                     </p>
 
-                    {/* Features List */}
+                    {/* 3. Dynamic Price Display */}
+                    <MVPPriceDisplay />
+
+                    {/* 4. CTA Button - Changes at 60+ screens */}
+                    {mvpScreenCount >= 60 ? (
+                        <button className="w-full py-4 border border-[#ffb000] text-[#ffb000] font-['Space_Mono'] font-bold text-sm tracking-widest hover:bg-[#ffb000] hover:text-black transition-all mb-8 uppercase shadow-[4px_4px_0px_0px_rgba(255,176,0,0.3)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]">
+                            Get a Quote
+                        </button>
+                    ) : (
+                        <button className="w-full py-4 border border-[#ffb000] text-[#ffb000] font-['Space_Mono'] font-bold text-sm tracking-widest hover:bg-[#ffb000] hover:text-black transition-all mb-8 uppercase shadow-[4px_4px_0px_0px_rgba(255,176,0,0.3)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]">
+                            Book a 15-min call
+                        </button>
+                    )}
+
+                    {/* 5. Features List */}
                     <div className="grid gap-4 grid-cols-1 mb-8">
                         {[
                             "Dedicated Design Lead + senior dev team",
@@ -378,22 +394,8 @@ export const Pricing: React.FC = () => {
                         ))}
                     </div>
 
-                    {/* Pricing Slider - Below Features */}
+                    {/* 6. Pricing Slider - Below Features */}
                     <PricingSlider />
-
-                    {/* Dynamic Price Display */}
-                    <MVPPriceDisplay />
-
-                    {/* CTA Button - Changes at 60+ screens */}
-                    {mvpScreenCount >= 60 ? (
-                        <button className="w-full py-4 border border-[#ffb000] text-[#ffb000] font-['Space_Mono'] font-bold text-sm tracking-widest hover:bg-[#ffb000] hover:text-black transition-all mb-4 uppercase shadow-[4px_4px_0px_0px_rgba(255,176,0,0.3)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]">
-                            Get a Quote
-                        </button>
-                    ) : (
-                        <button className="w-full py-4 border border-[#ffb000] text-[#ffb000] font-['Space_Mono'] font-bold text-sm tracking-widest hover:bg-[#ffb000] hover:text-black transition-all mb-4 uppercase shadow-[4px_4px_0px_0px_rgba(255,176,0,0.3)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]">
-                            Book a 15-min call
-                        </button>
-                    )}
                     
                     <div className="text-center mb-10">
                             <a href="#" onClick={(e) => e.preventDefault()} className="font-['Space_Mono'] text-[10px] text-[#555] hover:text-[#e0e0e0] uppercase tracking-wider transition-colors" aria-label="Better email link">
